@@ -7,3 +7,4 @@ test/vcxproj/Debug
 test/vcxproj/Release
 test/*.exe
 test/.vs
+.idea/workspace.xml
