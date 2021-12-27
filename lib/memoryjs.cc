@@ -498,7 +498,7 @@ Napi::Value readBuffer(const Napi::CallbackInfo& args) {
 
   Napi::Buffer<char> buffer = Napi::Buffer<char>::Copy(env, data, size);
   free(data);
-  
+
   if (args.Length() == 4) {
     Napi::Function callback = args[3].As<Napi::Function>();
     callback.Call(env.Global(), { Napi::String::New(env, ""), buffer });
@@ -639,18 +639,18 @@ Napi::Value writeBuffer(const Napi::CallbackInfo& args) {
 Napi::Value findPattern(const Napi::CallbackInfo& args) {
   Napi::Env env = args.Env();
 
-  if (args.Length() != 5 && args.Length() != 6) {
-    Napi::Error::New(env, "requires 5 arguments, or 6 arguments if a callback is being used").ThrowAsJavaScriptException();
+  if (args.Length() != 6 && args.Length() != 7) {
+    Napi::Error::New(env, "requires 6 arguments, or 7 if a callback is being used").ThrowAsJavaScriptException();
     return env.Null();
   }
 
-  if (!args[0].IsNumber() && !args[1].IsString() && !args[2].IsNumber() && !args[3].IsNumber() && !args[4].IsNumber()) {
-    Napi::Error::New(env, "first argument must be a number, the remaining arguments must be numbers apart from the callback").ThrowAsJavaScriptException();
+  if (!args[0].IsNumber() && !args[1].IsString() && !args[2].IsString() && !args[3].IsNumber() && !args[4].IsNumber() && !args[5].IsNumber()) {
+    Napi::Error::New(env, "first argument must be a number, second and third strings, and the remaining arguments must be numbers apart from the callback").ThrowAsJavaScriptException();
     return env.Null();
   }
 
-  if (args.Length() == 6 && !args[5].IsFunction()) {
-    Napi::Error::New(env, "sixth argument must be a function").ThrowAsJavaScriptException();
+  if (args.Length() == 7 && !args[6].IsFunction()) {
+    Napi::Error::New(env, "seventh argument must be a function").ThrowAsJavaScriptException();
     return env.Null();
   }
 
